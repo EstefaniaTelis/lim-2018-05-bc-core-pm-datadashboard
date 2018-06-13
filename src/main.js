@@ -25,5 +25,4 @@ fetch('http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/users.json')
     })
     .then(function(users) {
         console.log(users);
-    
     });
