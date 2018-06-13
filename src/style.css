@@ -1,0 +1,82 @@
+body{
+    box-sizing: border-box;
+    }
+.logo {
+    padding: 2%;
+    margin: 1% 1% 0% 1% ;
+    background: #FFE521;
+    border: solid 1px;
+    }
+    /*img logo*/
+div.logo img{
+    width: 12%;
+    height: 12%;
+    }
+input{
+    margin-left:20px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    padding-top: 12px;
+    padding-right: 40px;
+    }
+#login{
+    width: 5%;
+    height: 5%;
+    padding-left: 150px;
+    border-radius: 40px;
+    }
+nav{
+    background: rgba(245, 243, 243, 0.815);
+    padding: 2%;
+    text-align: left;
+    border: solid 1px;
+    margin: 0% 1% 1% 1%;
+    }
+div{
+    border: solid 1px;
+    /*text-align: right;*/
+    background:white;
+    }
+button{
+    /*text-align: left;*/
+    margin-right: 2%;
+    }
+section{
+    padding: 6%;
+    background: #e6e0d4;
+    border: solid 1px;
+    margin:1% 1% 1%;
+    }
+#primera {
+    padding-top: 16%;
+    padding-bottom: 8%;
+    padding-right: 19%;
+    padding-left: 1%;
+    background: #e6e0d4;
+    border: solid 1px;
+    margin: 1% 1% 1%;
+    display: inline-block;
+    }
+#segunda {
+    padding-right: 53%;
+    padding-top: 16%;
+    padding-bottom: 8%;
+    background: #7e580b;
+    border: solid 1px;
+    margin: 1% 1% 1%;
+    display: inline-block;
+    }
+#firstSeccion{
+    background: yellow;
+    margin-right: 1%;
+    }
+#secondSeccion{
+    background: yellow;
+    margin-right: 1%;
+    }
+    /*footer{
+    padding: 2%;
+    background: #DE9A12;
+    border: solid 1px;
+    margin: 0% 1% 1% 1%;
+    }*/
