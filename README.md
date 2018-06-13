@@ -17,4 +17,19 @@ para brindarles acceso rápido, ordenado, visual e interactivo de las estadistic
 
 Se plantearon originalmente en 2 pantallas, una con la información general de las estudiantes, y otra con la información de cada una (perfil). 
 
-![Sketch](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/pantalla-1.jpg "sketch")
+![Sketch_1](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/sketch__dash_1.JPG "sketch_1")
+
+![Sketch_2](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/sketch_dash_2.JPG "sketch_2")
+
+## Protitipado
+
+Una vez obtenido nuevamente el feedback de las usuarias, se realizaron modificaciones importantes, como:
+
+1. Se agregó una columna lateral, donde podrá seleccionar los datos según su requerimiento.
+2. Barra de búsqueda en la columna lateral.
+3. En la previsualización de las usuarias se muestra también las estadisticas generales, que podrán ahora ordenarse en forma ascendente y descendente.
+4. Finalmente se realizan los prototipos de alta fidelidad, obteniendo los resultados de las siguientes imagenes:
+
+![Proto_1](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/pantalla-1.jpg "proto_1")
+
+![Proto_2](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/pantalla-2.jpg "proto_2")
