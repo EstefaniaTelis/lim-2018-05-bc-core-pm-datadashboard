@@ -6,40 +6,20 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-    <img src="img/logo.jpg">
-    <input type="text" value="Buscar..." size="31" maxlength="255" /> 
-    <input type="submit" value="Buscar" /> 
-    <img id = "login" src="img/login.png">
-    </div>
-  </header>
-  <nav>
-  <!--<input type="text" name="" size="31" maxlength="255" /> 
-  <input type="submit" value="Buscar" /> 
-  <input type="button" value="hol">
-  <input type="button" value="hij">
-  <input type="button" value="sii">-->
-  </nav>
-  <section id = "primera">
-    <div id="firstSeccion">
-    <p>Primera seccion</p>
-    </div>
-    <div id="secondSeccion">
-    <p>contenido</p>
-    </div> 
-  </section>
-  <section id = "segunda">
-    <div id="firstSeccion">
-    <p>Primera seccion</p>
-    </div>
-    <div id="secondSeccion">
-    <p>contenido</p>
-    </div> 
-  </section>
-<!--<footer>
-<p>Creado por: E y Y</p>
-</footer>-->
+ <div class="wrapper">
+   <div class="one">
+     <img id="logo" src="img/logo.jpg" alt="logo_laboratoria">
+     <input type="search" id="mySearch" name="q"
+   placeholder="Search the site..." size="30">
+   <button id="boton"> Search</button>
+   <img id="login" src="img/login.png" alt="">
+   </div>
+   <div class="three">
+     <select id="cohortsDropdown" name="cohorts" onchange="dataUsers()">
+     </select>
+         </div>
+   <div id="six"></div>
+  </div>
 <script src="main.js"></script>
 </body>
 </html>

@@ -1,82 +1,51 @@
-body{
-    box-sizing: border-box;
-    }
-.logo {
-    padding: 2%;
-    margin: 1% 1% 0% 1% ;
-    background: #FFE521;
-    border: solid 1px;
-    }
-    /*img logo*/
-div.logo img{
-    width: 12%;
-    height: 12%;
-    }
-input{
-    margin-left:20px;
-    margin-top: 3px;
-    margin-bottom: 10px;
-    padding-top: 12px;
-    padding-right: 40px;
-    }
+
+* {box-sizing: border-box;}
+.wrapper {
+max-width: 1350px;
+margin: 0 auto;
+background:rgb(126, 88, 11) ;
+/*background:url(http://laboratoria.la/images/homepage/logo_laboratoria.pnghttp://laboratoria.la/images/homepage/logo_laboratoria.png);*/
+}
+
+.wrapper > div {
+border: 2px solid rgb(126, 88, 11);
+border-radius: 5px;
+background-color: #FFE521;
+padding: 1em;
+color: black;
+}.wrapper {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-gap: 5px;
+grid-auto-rows: minmax(120px, auto);
+}
+/*Header*/
+.one {
+grid-column: 1 / 5;
+grid-row: 1;
+}
+#logo{
+   width: 170px;
+   height: 60px;
+}
+#mySearch{
+   margin-left: 120px;
+   margin-top: 5px;
+}
+#boton{
+margin-right: 10px;
+}
 #login{
-    width: 5%;
-    height: 5%;
-    padding-left: 150px;
-    border-radius: 40px;
-    }
-nav{
-    background: rgba(245, 243, 243, 0.815);
-    padding: 2%;
-    text-align: left;
-    border: solid 1px;
-    margin: 0% 1% 1% 1%;
-    }
-div{
-    border: solid 1px;
-    /*text-align: right;*/
-    background:white;
-    }
-button{
-    /*text-align: left;*/
-    margin-right: 2%;
-    }
-section{
-    padding: 6%;
-    background: #e6e0d4;
-    border: solid 1px;
-    margin:1% 1% 1%;
-    }
-#primera {
-    padding-top: 16%;
-    padding-bottom: 8%;
-    padding-right: 19%;
-    padding-left: 1%;
-    background: #e6e0d4;
-    border: solid 1px;
-    margin: 1% 1% 1%;
-    display: inline-block;
-    }
-#segunda {
-    padding-right: 53%;
-    padding-top: 16%;
-    padding-bottom: 8%;
-    background: #7e580b;
-    border: solid 1px;
-    margin: 1% 1% 1%;
-    display: inline-block;
-    }
-#firstSeccion{
-    background: yellow;
-    margin-right: 1%;
-    }
-#secondSeccion{
-    background: yellow;
-    margin-right: 1%;
-    }
-    /*footer{
-    padding: 2%;
-    background: #DE9A12;
-    border: solid 1px;
-    margin: 0% 1% 1% 1%;
-    }*/
+   width: 70px;
+   height: 60px;
+   margin-left: 600px;
+}
+.three {
+grid-column: 1;
+grid-row: 2 / 6;
+}
+/*Footer*/
+#six {
+   grid-column: 2/ 5;
+   grid-row: 2 / 6;
+  }
