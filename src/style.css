@@ -10,7 +10,7 @@ background:rgb(126, 88, 11) ;
 .wrapper > div {
 border: 2px solid rgb(126, 88, 11);
 border-radius: 5px;
-background-color: #FFE521;
+background-color: yellow;
 padding: 1em;
 color: black;
 }.wrapper {
