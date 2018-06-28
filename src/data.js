@@ -8,6 +8,7 @@ select1.addEventListener("click", ()=>{
 let defaultOption = document.createElement('option');
 defaultOption.text = 'Selecciona una cohort';
 
+
 dropdown.add(defaultOption);
 dropdown.selectedIndex = 0;
 
