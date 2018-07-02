@@ -121,6 +121,7 @@ function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users e
       tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreAvg + '</td>';
       table.appendChild(tableRow);
+
     })
 
     tableContainer.appendChild(table);
@@ -128,4 +129,14 @@ function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users e
 
   }
 }
-// FIN IMPRIME USUARIOS DE LIM PRECORE 2018
+
+function login(form){
+  if(form.id.value == 'Yavet'){
+    if(form.pass.value == 'Cespedes'){
+      location="index.html"
+    }
+  }
+  else{
+    alert("Ingrese usuario y contrseña correctos");
+  }
+}

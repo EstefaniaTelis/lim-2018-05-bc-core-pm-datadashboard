@@ -90,3 +90,4 @@ window.computeUsersStats = (users, progress, courses) => {
   // console.log(usersWithStats)
   return usersWithStats
 }  
+
