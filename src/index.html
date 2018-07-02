@@ -15,7 +15,7 @@
    <img id="login" src="img/login.png" alt="">
    </div>
    <div class="three">
-      <select id = "sede" name = "sedes" >
+      <select id = "sede" name = "sedes" onchange="sedeLab()" >
           <option value = "0">Seleccione una sede</option>
           <option id ="opcion1" value = "1">Lima</option>
           <option id="opcion2" value = "2">Santiago de Chile</option>
@@ -23,7 +23,7 @@
           <option value = "4">Ciudad de México</option>
           <option value = "5">Guadalajara</option>
         </select> </br></br>
-        <select id="cohortsDropdown" name="cohorts" onchange="dataUsers()">
+        <select id="seleccionandoCohorts" name="cohorts" onchange="dataUsers()">
         </select> </br></br>
         <select>
             <option value="">Seleccioar un stats</option> 
@@ -32,6 +32,7 @@
           <select>
               <option value="">Ordenar de Mayor y Menor</option>
           </select>
+
         </br></br> 
           <label>
               <input type="text">
@@ -42,8 +43,8 @@
     <!-- <button id="btn" type="button">Click Me!</button> -->
    </div>
   </div>
+<script src="data.js"></script>
 <script src="main.js"></script>
-<!--<script src="data.js"></script>
-<script src="probando.js"></script> -->
+<!--<script src="probando.js"></script> -->
 </body>
 </html>

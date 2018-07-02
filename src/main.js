@@ -1,23 +1,12 @@
-let dropdown = document.getElementById('cohortsDropdown'); //Asociando JS y HTML
-dropdown.length = 0;
+let pintadoCohort = document.getElementById('seleccionandoCohorts'); //Asociando JS y HTML
+pintadoCohort.length = 0;
 
-let defaultOption = document.createElement('option'); //Definiendo el option por defecto
+let defaultOption = document.createElement('option'); //Define option predeterminada
 defaultOption.text = 'Selecciona una cohort';
 
-const cohortsURL = 'http://127.0.0.1:5500/data/cohorts.json';
-const usersURL = 'http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const progressURL = 'http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+pintadoCohort.add(defaultOption);
+pintadoCohort.selectedIndex = 0;
 
-const getDataJson = (callback) => {
-  fetch(cohortsURL) 
-    .then((reponseC) => {
-
-    })
-}
-
-
-dropdown.add(defaultOption);
-dropdown.selectedIndex = 0;
 
 fetch(cohortsURL)  //fetch de cohorts
  .then(function(response) {  
@@ -26,16 +15,14 @@ fetch(cohortsURL)  //fetch de cohorts
          response.status);  
        return;  
      }
-
      response.json()
      .then(function(data) {  
        let option;
-   
        for (let i = 0; i < data.length; i++) {
          option = document.createElement('option');
            option.text = data[i].id;
            option.value = data[i].id;
-           dropdown.add(option);
+           pintadoCohort.add(option);
        }    
      });
    }  
@@ -44,9 +31,8 @@ fetch(cohortsURL)  //fetch de cohorts
  .catch(function(err) {  
    console.error('Fetch Error -', err);  
  });
-
 function dataUsers(){ //Detecta la cohort de preadmisión e imprime sus users en el HTML
-  let lim= document.getElementById('cohortsDropdown').value;
+  let lim = document.getElementById('seleccionandoCohorts').value;
   console.log(lim);
   if(lim === "lim-2018-03-pre-core-pw")
   {
@@ -123,3 +109,14 @@ function dataUsers(){ //Detecta la cohort de preadmisión e imprime sus users en
 //     }]
 
 // }
+
+function login(form){
+  if(form.id.value == 'Yavet'){
+    if(form.pass.value == 'Cespedes'){
+      location="index.html"
+    }
+  }
+  else{
+    alert("Ingrese usuario y contrseña correctos");
+  }
+}
