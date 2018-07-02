@@ -1,67 +1,92 @@
-let dropdown = document.getElementById('cohortsDropdown');
-dropdown.length = 0;
+window.computeUsersStats = (users, progress, courses) => {
+  let usersWithStats = [];
+  let i = 0
+  users.forEach(user => {
+    // console.log(user.id, progress[user.id])
 
-let select1 = document.getElementById('opcion1');
-select1.addEventListener("click", ()=>{
-}
-)
-let defaultOption = document.createElement('option');
-defaultOption.text = 'Selecciona una cohort';
-
-dropdown.add(defaultOption);
-dropdown.selectedIndex = 0;
-
-const cohortURL = 'http://127.0.0.1:5500/data/cohorts.json';
-const usersURL = 'http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const progressURL ='http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/progress.json';
-
-  fetch(cohortURL)
-  .then(function(response) {  
-      if (response.status !== 200) {  
-        console.warn('Oops, parece que hubo un problema. Status Code: ' + 
-          response.status);  
-        return;  
+    let newUser = user;
+    newUser.progress = progress[user.id]
+    newUser.stats = {
+      percent: 0,
+      exercises: {
+        total: 0,
+        completed: 0,
+        percent: 0
+      },
+      quizzes: {
+        total: 0,
+        completed: 0,
+        percent: 0,
+        scoreSum: 0,
+        scoreAvg: 0
+      },
+      reads: {
+        total: 0,
+        completed: 0,
+        percent: 0
       }
-      response.json().then(function(data) {  
-        let option;
-    	for (let i = 0; i < data.length; i++) {
-          option = document.createElement('option');
-      	  option.text = data[i].id;
-      	  option.value = data[i].id;
-      	  dropdown.add(option);
-    	}    
-      }); 
-    })
-// const callbackGetCohort = (cohorts) => {
-//   console.log('BEGIN')
-//   console.log(cohorts)
-//   console.log('END')
-// }
+    }
 
- const getData = (callback) => {
-      fetch(usersURL)
-        .then((responseU) => {
-          fetch(progressURL)
-            .then((responseP) => {
-             Promise.all([responseU.json(), responseP.json()]).then(dataArr => {
-                [window.users, window.progress] = dataArr; //uso en ecs6
-                window.userGlobal = dataArr[0];
-                callback(users, progress);
-            })
+    if (newUser.progress['intro'] && newUser.progress['intro']['units'] && newUser.role === "student") {
+      let unitsUser = Object.keys(newUser.progress['intro']['units'])
+      // console.log(unitsUser);
+      let puntuacion = 0
+      let unitsUserMap = [];
+      unitsUser.forEach(unit => {
+        // console.log(newUser.progress['intro']['units'][unit]);
+        unitsUserMap[unit] = newUser.progress['intro']['units'][unit];
+        // console.log(unitsUserMap[unit]);
+        let unitParts = Object.keys(unitsUserMap[unit]['parts']);
+        // console.log(unitParts);
+        let partsMap = [];
+
+        unitParts.forEach(part => {
+          partsMap[part] = unitsUserMap[unit]['parts'][part];
+          // AQUI CALCULAS EL STATS POR CADA USUARIO
+          if (partsMap[part].type === "practice") {
+            newUser.stats.exercises.total++
+
+            if (partsMap[part].completed == 1) {
+              newUser.stats.exercises.completed++
+            }
+            newUser.stats.exercises.percent = Math.round((newUser.stats.exercises.completed * 100) / newUser.stats.exercises.total)
+          }
+          // console.log(partsMap[part].type); 
+          if (partsMap[part].type === "read") {
+            newUser.stats.reads.total++
+
+            if (partsMap[part].completed == 1) {
+              newUser.stats.reads.completed++
+
+            }
+            newUser.stats.reads.percent = Math.round((newUser.stats.reads.completed * 100) / newUser.stats.reads.total)
+
+          }
+          if (partsMap[part].type === "quiz") {
+            newUser.stats.quizzes.total++
+
+            if (partsMap[part].completed == 1) {
+              newUser.stats.quizzes.completed++
+              puntuacion += partsMap[part].score
+            }
+            newUser.stats.quizzes.percent = Math.round((newUser.stats.quizzes.completed * 100) / newUser.stats.quizzes.total)
+
+          }
         })
-    })
-}
-const callbackGetData = (users, progress) => {
-  console.log('BEGIN')
-  console.log(users, progress)
-  console.log('END')
-}
+        unitsUserMap[unit]['parts'] = partsMap
+      })
 
-getData(callbackGetData);
+      newUser.stats.quizzes.scoreSum = puntuacion; // todas las puntuacion
+      newUser.stats.quizzes.scoreAvg = Math.round(puntuacion / newUser.stats.quizzes.completed);  // todas las puntiacion / el total de quizzes completados
 
-const callCohortsData = (users) =>{
-  console.log(cohorts);
-}
-
-
-//Añadir comentarioContraer 
+      // console.log(unitsUserMap); 
+      newUser.progress['intro']['units'] = unitsUserMap;
+      // console.log(newUser.stats);
+      newUser.stats.percent = newUser.progress['intro'].percent
+    }
+    usersWithStats[i] = newUser
+    i++
+  })
+  // console.log(usersWithStats)
+  return usersWithStats
+}  

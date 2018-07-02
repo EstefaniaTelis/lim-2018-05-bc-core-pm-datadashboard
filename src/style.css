@@ -1,16 +1,14 @@
 
 * {box-sizing: border-box;}
 .wrapper {
-max-width: 1350px;
+max-width: 1500px;
 margin: 0 auto;
-background:rgb(126, 88, 11) ;
-/*background:url(http://laboratoria.la/images/homepage/logo_laboratoria.pnghttp://laboratoria.la/images/homepage/logo_laboratoria.png);*/
+background:yellow ;
 }
-
 .wrapper > div {
-border: 2px solid rgb(126, 88, 11);
+border: 1px solid rgb(126, 88, 11);
 border-radius: 5px;
-background-color: yellow;
+background-color: rgb(255, 255, 255);
 padding: 1em;
 color: black;
 }.wrapper {
@@ -25,8 +23,8 @@ grid-column: 1 / 5;
 grid-row: 1;
 }
 #logo{
-   width: 170px;
-   height: 60px;
+   width: 350px;
+   height: 100px;
 }
 #mySearch{
    margin-left: 120px;
@@ -38,7 +36,7 @@ margin-right: 10px;
 #login{
    width: 70px;
    height: 60px;
-   margin-left: 600px;
+   margin-left: 500px;
 }
 .three {
 grid-column: 1;
@@ -48,4 +46,10 @@ grid-row: 2 / 6;
 #six {
    grid-column: 2/ 5;
    grid-row: 2 / 6;
+  }
+
+  #six .container-table{
+    width: auto;
+    overflow: scroll;
+    max-height: 600px;
   }
