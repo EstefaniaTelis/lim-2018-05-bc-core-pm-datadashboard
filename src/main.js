@@ -28,10 +28,12 @@ const callbackGetData = (users, progress, cohorts) => {
   //   // console.log(cohort.coursesIndex)
   //   courses.push(cohort.coursesIndex)
   // })
-  const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
-  const courses = Object.keys(cohort.coursesIndex);
-  // console.log(users);
-  window.usersWithStats = computeUsersStats(users, progress, courses)
+  // const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+  // const courses = Object.keys(cohort.coursesIndex);
+  // console.log(courses);
+  // const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: ''}
+  // window.userWithStats = processCohortData(options);
+  // window.usersWithStats = computeUsersStats(users, progress, courses);
 
   // console.log(users)
 }
@@ -94,6 +96,13 @@ function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users e
   let lim = document.getElementById('cohortsDropdown').value;
   // console.log(lim);
   if (lim === "lim-2018-03-pre-core-pw") {
+    const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+  
+    //window.usersWithStats = computeUsersStats(users, progress, courses);
+    const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: ''}
+    let userStats = processCohortData(options);
+
     // console.log("window.usersWithStats",window.usersWithStats);  
     let tableContainer = document.createElement('div');
     tableContainer.classList = "container-table"
@@ -101,21 +110,21 @@ function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users e
     table.classList = "table";
     let tableHead = document.createElement('tr');
     tableHead.classList = "thead-dark";
-    tableHead.innerHTML += '<th>Alumnas</th><th>Completitud general</th><th>Total de ejecicios</th><th>Ejecicios completados</th><th>%</th><th>Lecturas</th><th>L. completadas</th><th>% Lecturas</th><th>Nro Quizzes</th><th>Quizzes completados</th><th>% Quizzes</th><th>scoreSum</th><th>scoreAvg</th>';
+    tableHead.innerHTML += '<th>Alumnas</th><th>Completitud general</th><th>Ejecicios completados</th><th>%</th><th>L. completadas</th><th>% Lecturas</th><th>Quizzes completados</th><th>% Quizzes</th><th>scoreSum</th><th>scoreAvg</th>';
     table.appendChild(tableHead);
 
-    window.usersWithStats.forEach(user => {
+    userStats.forEach(user => {
       // console.log(user);
       let tableRow = document.createElement('tr');
       tableRow.innerHTML += '<td>' + user.name + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.percent + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
+      // tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.exercises.completed + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.exercises.percent + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
+      // tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.reads.completed + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.reads.percent + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
+      // tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.quizzes.completed + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.quizzes.percent + '</td>';
       tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
@@ -129,6 +138,10 @@ function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users e
 
   }
 }
+
+dropdown.addEventListener('change', (evt) => {
+  dataUsers();
+});
 
 function login(form){
   if(form.id.value == 'Yavet'){
