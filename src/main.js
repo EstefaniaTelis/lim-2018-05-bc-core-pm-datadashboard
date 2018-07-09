@@ -1,6 +1,6 @@
-const cohortsURL = 'http://127.0.0.1:5500/data/cohorts.json';
-const usersURL = 'http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const progressURL = 'http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+const cohortsURL = '../data/cohorts.json';
+const usersURL = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+const progressURL = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 
 window.usersWithStats = []
 const getData = (callback) => {
