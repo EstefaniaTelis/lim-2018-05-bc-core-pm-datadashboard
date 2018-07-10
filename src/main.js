@@ -69,6 +69,10 @@ countrySelector(dropdownOne);
 //INICIO DROPDOWN COHORTS
 let dropdown = document.getElementById('cohortsDropdown'); //Asociando JS y HTML
 
+dropdown.addEventListener('change', (evt) => {
+  dataUsers(evt.target.value);
+});
+
 const cohortSelect = (cohort) => {
   dropdown.length = 0;
   let defaultOption = document.createElement('option'); //Definiendo el option por defecto
@@ -90,17 +94,18 @@ countryOnChange = () => {
   let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
   cohortSelect(cohortFilter);
 }
+const options = {cohort: 0, cohortData: {users: 0, progress: 0}, sortBy: '', orderDirection: '', search: ''}
 
 //IMPRIME USUARIOS DE LIM PRECORE 2018
-function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users en el HTML
-  let lim = document.getElementById('cohortsDropdown').value;
-  // console.log(lim);
-  if (lim === "lim-2018-03-pre-core-pw") {
+function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e imprime sus users en el HTML
+  if (selectedCohort !== "lim-2018-03-pre-core-pw") {
+    return;
+  }
     const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
-    const courses = Object.keys(cohort.coursesIndex);
-  
-    //window.usersWithStats = computeUsersStats(users, progress, courses);
-    const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: ''}
+    const courses = Object.keys(cohort.coursesIndex)
+    options.cohort = cohort;
+    options.cohortData.users = users;
+    options.cohortData.progress = progress;
     let userStats = processCohortData(options);
 
     // console.log("window.usersWithStats",window.usersWithStats);  
@@ -135,21 +140,18 @@ function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users e
 
     tableContainer.appendChild(table);
     six.appendChild(tableContainer);
-
-  }
 }
 
-dropdown.addEventListener('change', (evt) => {
-  dataUsers();
-});
 
-function login(form){
-  if(form.id.value == 'Yavet'){
-    if(form.pass.value == 'Cespedes'){
-      location="index.html"
-    }
-  }
-  else{
-    alert("Ingrese usuario y contrseña correctos");
-  }
-}
+
+
+// function login(form){
+//   if(form.id.value == 'Yavet'){
+//     if(form.pass.value == 'Cespedes'){
+//       location="index.html"
+//     }
+//   }
+//   else{
+//     alert("Ingrese usuario y contrseña correctos");
+//   }
+// }
