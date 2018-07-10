@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Data Dashboard</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <title>Data Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
 </head>
+
 <body>
- <div class="wrapper">
-   <div class="one">
-     <img id="logo" src="img/logo.jpg" alt="logo_laboratoria">
-     <input type="search" id="mySearch" name="q"
-   placeholder="Search the site..." size="30">
-   <button id="boton"> Search</button>
-   <img id="login" src="img/login.png" alt="">
-   </div>
-   <div class="three">
-      <select id = "sede" name = "sedes" onchange="sedeLab()" >
-          <option value = "0">Seleccione una sede</option>
-          <option id ="opcion1" value = "1">Lima</option>
-          <option id="opcion2" value = "2">Santiago de Chile</option>
-          <option value = "3">Sao Paulo</option>
-          <option value = "4">Ciudad de México</option>
-          <option value = "5">Guadalajara</option>
-        </select> </br></br>
-        <select id="seleccionandoCohorts" name="cohorts" onchange="dataUsers()">
-        </select> </br></br>
-        <select>
-            <option value="">Seleccioar un stats</option> 
-          </select>
-        </br></br>
-          <select>
-              <option value="">Ordenar de Mayor y Menor</option>
-          </select>
+  <div class="wrapper">
+    <div class="one">
+      <img id="logo" src="img/logo.png" alt="logo_laboratoria">
+      <input type="search" id="mySearch" name="q" placeholder="Search the site..." size="30">
+      <button id="boton">Search</button>
+      <img id="login" src="img/login.png" alt="">
+    </div>
+    <div class="three">
+      <select id="countryDropdown" name="countryDropdown" onchange="countryOnChange()">
+      </select>
+      <select id="cohortsDropdown" name="cohorts">
+      </select>
+      <select id="orderSelector" name="order" onchange="ordered()">
+      </select>
+      <input type="text" id="writeNamesUsers" placeholder="write the name">
 
-        </br></br> 
-          <label>
-              <input type="text">
-          </label>
-         </div>
-   <div id="six">
-
-    <!-- <button id="btn" type="button">Click Me!</button> -->
-   </div>
+    </div>
+    <div id="six">
+    </div>
   </div>
+
 <script src="data.js"></script>
 <script src="main.js"></script>
-<!--<script src="probando.js"></script> -->
+
 </body>
+
 </html>

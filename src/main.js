@@ -1,114 +1,154 @@
-let pintadoCohort = document.getElementById('seleccionandoCohorts'); //Asociando JS y HTML
-pintadoCohort.length = 0;
+const cohortsURL = '../data/cohorts.json';
+const usersURL = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+const progressURL = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 
-let defaultOption = document.createElement('option'); //Define option predeterminada
-defaultOption.text = 'Selecciona una cohort';
-
-pintadoCohort.add(defaultOption);
-pintadoCohort.selectedIndex = 0;
-
-
-fetch(cohortsURL)  //fetch de cohorts
- .then(function(response) {  
-     if (response.status !== 200) {  
-       console.warn('Oops, parece que hubo un problema. Status Code: ' +
-         response.status);  
-       return;  
-     }
-     response.json()
-     .then(function(data) {  
-       let option;
-       for (let i = 0; i < data.length; i++) {
-         option = document.createElement('option');
-           option.text = data[i].id;
-           option.value = data[i].id;
-           pintadoCohort.add(option);
-       }    
-     });
-   }  
- )  
-
- .catch(function(err) {  
-   console.error('Fetch Error -', err);  
- });
-function dataUsers(){ //Detecta la cohort de preadmisión e imprime sus users en el HTML
-  let lim = document.getElementById('seleccionandoCohorts').value;
-  console.log(lim);
-  if(lim === "lim-2018-03-pre-core-pw")
-  {
-    fetch(usersURL) //fetch de users
-    .then(function(users) {
-      return users.json();
+window.usersWithStats = []
+const getData = (callback) => {
+  fetch(usersURL)
+    .then((responseU) => {
+      fetch(progressURL)
+        .then((responseP) => {
+          fetch(cohortsURL)
+            .then((responseC) => {
+              Promise.all([responseU.json(), responseP.json(), responseC.json()])
+                .then(dataArr => {
+                  [window.users, window.progress, window.cohorts] = dataArr; //uso en ecs6
+                  callback(users, progress, cohorts);
+                })
+            })
+        })
     })
+}
+const callbackGetData = (users, progress, cohorts) => {
+  cohortSelect(cohorts);
 
-    .then((dataUsers2)=>{
-     const table= document.createElement('table');
-     const tableHead = document.createElement('tr');
-     tableHead.innerHTML += '<th>Alumnas</th><th>ID</th>';
-     table.appendChild(tableHead);
+  // esta seria la forma global (todos los cohorts)
+  // let courses = [];
+  // cohorts.forEach( cohort => {
+  //   // console.log(cohort.coursesIndex)
+  //   courses.push(cohort.coursesIndex)
+  // })
+  // const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+  // const courses = Object.keys(cohort.coursesIndex);
+  // console.log(courses);
+  // const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: ''}
+  // window.userWithStats = processCohortData(options);
+  // window.usersWithStats = computeUsersStats(users, progress, courses);
 
-      for(let i=0;i<dataUsers2.length;i++){
-       
-       const tableRow = document.createElement('tr');
-       tableRow.innerHTML += '<td>'+dataUsers2[i].name+'</td>';
-       tableRow.innerHTML += '<td>'+dataUsers2[i].id+'</td>';
-       table.appendChild(tableRow);
-
-   
-      }
-      six.appendChild(table);
-     
-    })
-  }
+  // console.log(users)
 }
 
-// const = getDataJSON = (callBack) => { 
-//   fetch('http://127.0.0.1:5500/data/cohorts.json')
-//     .then((responseC) => {
-//       fetch('http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/users.json')
-//         .then((responseU) => {
-//           fetch('http://127.0.0.1:5500/data/cohorts/lim-2018-03-pre-core-pw/progress.json')
-//            .then((responseP) => {
-//               Promise.all([responseC.json(), responseP.json(), responseU.json()])
-//               .then(data => {
-//                   const [responseC, responseP, responseU] = data;
-//                   callBack[cohorts, users, progress];
-//               })
-//           })
-//       })
-//   })
+getData(callbackGetData); // promise.all de los fetch con todos los datos
 
-// window.computeUsersStats = (users, progress, courses) => {
-//     let stats = {users, progress, courses};
-//     let usersWithStats = " ";
+// INICIO DROPDOWN PAISES
+let dropdownOne = document.getElementById('countryDropdown'); //Asociando JS y HTML
+dropdownOne.length = 0;
+let defaultOptionCountry = document.createElement('option'); //Definiendo el option por defecto
+defaultOptionCountry.text = 'Selecciona una ciudad';
+dropdownOne.add(defaultOptionCountry);
+dropdownOne.selectedIndex = 0;
 
-//     return usersWithStats [{
-//         "stats": {
-//             "percent": 0, //Número entero entre 0 y 100 que indica el porcentaje de completitud general del usuario con respecto 
-//                       //a todos los cursos asignados a su cohort.
-//             "excercises": {
-//                 "total": 0, //Número total de ejercicios autocorregidos presentes en cursos del cohort.
-//                 "completed": 0, //Número de ejercicios autocorregidos completados por el usuario.
-//                 "percent": 0 //Porcentaje de ejercicios autocorregidos completados.
-//             },
-//             "reads": {
-//                 "total": 0, //Número total de lecturas presentes en cursos del cohort.
-//                 "completed": 0, //Número de lecturas completadas por el usuario.
-//                 "percent": 0 //Porcentaje de lecturas completadas.  
-//             },
-//             "quizzes": {
-//                 "total": 0, //Número total de quizzes presentes en cursos del cohort.
-//                 "completed": 0, //Número de quizzes completadas por el usuario.
-//                 "percent": 0, //Porcentaje de quizzes completadas.
-//                 "scoreSum": 0, //Suma de todas las puntuaciones (score) de los quizzes completados.
-//                 "scoreAvg": 0 //Promedio de puntuaciones en quizzes completados.
-//             },
+const countrySelector = (optionCountry) => { // Función que asignma nombres de países
+  let country = [
+    { value: "lim", text: "Lima" },
+    { value: "scl", text: "Santiago" },
+    { value: "cdm", text: "Ciudad de México" },
+    { value: "spl", text: "Sao Paulo" }
+  ];
 
-//         }
+  country.forEach(item => {
+    optionCountry = document.createElement('option');
+    optionCountry.text = item.text;
+    optionCountry.value = item.value;
+    dropdownOne.add(optionCountry);
+  })
+};
+countrySelector(dropdownOne);
+//FIN DROPDOWN PAISES
 
-//     }]
+//INICIO DROPDOWN COHORTS
+let dropdown = document.getElementById('cohortsDropdown'); //Asociando JS y HTML
 
-// }
+const cohortSelect = (cohort) => {
+  dropdown.length = 0;
+  let defaultOption = document.createElement('option'); //Definiendo el option por defecto
+  defaultOption.text = 'Selecciona una cohort';
+  // console.log(window.cohort);
+  dropdown.add(defaultOption);
+  dropdown.selectedIndex = 0;
+
+  for (let i = 0; i < cohort.length; i++) {
+    option = document.createElement('option');
+    option.text = cohort[i].id;
+    option.value = cohort[i].id;
+    dropdown.add(option);
+  }
+}
+//FIN DROPDOWN COHORTS
+
+countryOnChange = () => {
+  let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
+  cohortSelect(cohortFilter);
+}
+
+//IMPRIME USUARIOS DE LIM PRECORE 2018
+function dataUsers() { //Detecta la cohort de preadmisión e imprime sus users en el HTML
+  let lim = document.getElementById('cohortsDropdown').value;
+  // console.log(lim);
+  if (lim === "lim-2018-03-pre-core-pw") {
+    const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+    const courses = Object.keys(cohort.coursesIndex);
+    //window.usersWithStats = computeUsersStats(users, progress, courses);
+
+    const filterName = document.getElementById('writeNamesUsers');
+
+    const options = {
+      cohort: cohort, 
+      cohortData:{
+        users: users, 
+        progress: progress
+      }, 
+      sortBy: 'nombre', 
+      orderDirection: 'DESC', 
+      search: filterName.value
+    }
+    let userStats = processCohortData(options);
+
+    // console.log("window.usersWithStats",window.usersWithStats);  
+    let tableContainer = document.createElement('div');
+    tableContainer.classList = "container-table"
+    let table = document.createElement('table');
+    table.classList = "table";
+    let tableHead = document.createElement('tr');
+    tableHead.classList = "thead-dark";
+    tableHead.innerHTML += '<th>Alumnas</th><th>Completitud general</th><th>Ejecicios completados</th><th>%</th><th>L. completadas</th><th>% Lecturas</th><th>Quizzes completados</th><th>% Quizzes</th><th>scoreSum</th><th>scoreAvg</th>';
+    table.appendChild(tableHead);
+
+    userStats.forEach(user => {
+      // console.log(user);
+      let tableRow = document.createElement('tr');
+      tableRow.innerHTML += '<td>' + user.name + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.percent + '</td>';
+      // tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.exercises.completed + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.exercises.percent + '</td>';
+      // tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.reads.completed + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.reads.percent + '</td>';
+      // tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.quizzes.completed + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.quizzes.percent + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
+      tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreAvg + '</td>';
+      table.appendChild(tableRow);
+    })
+    tableContainer.appendChild(table);
+    six.appendChild(tableContainer);
+  }
+}
+dropdown.addEventListener('change', (evt) => {
+  dataUsers();
+});
 
 function login(form){
   if(form.id.value == 'Yavet'){
