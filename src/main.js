@@ -21,21 +21,6 @@ const getData = (callback) => {
 }
 const callbackGetData = (users, progress, cohorts) => {
   cohortSelect(cohorts);
-
-  // esta seria la forma global (todos los cohorts)
-  // let courses = [];
-  // cohorts.forEach( cohort => {
-  //   // console.log(cohort.coursesIndex)
-  //   courses.push(cohort.coursesIndex)
-  // })
-  // const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
-  // const courses = Object.keys(cohort.coursesIndex);
-  // console.log(courses);
-  // const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: ''}
-  // window.userWithStats = processCohortData(options);
-  // window.usersWithStats = computeUsersStats(users, progress, courses);
-
-  // console.log(users)
 }
 
 getData(callbackGetData); // promise.all de los fetch con todos los datos
@@ -89,12 +74,24 @@ const cohortSelect = (cohort) => {
   }
 }
 //FIN DROPDOWN COHORTS
+//DROPDOWN ORDER
+let orderSelect = document.getElementById('order');
+
+orderSelect.addEventListener('change', (e) =>{
+options.sortBy = orderSelect.value;
+dataUsers();
+});
+
+// FIN DROPDOWN ORDER
+
+
+const filterName = document.getElementById('writeNamesUsers'); // Llama al input de búsqueda
 
 countryOnChange = () => {
   let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
   cohortSelect(cohortFilter);
 }
-const options = {cohort: 0, cohortData: {users: 0, progress: 0}, sortBy: '', orderDirection: '', search: ''}
+const options = {cohort: {}, cohortData: {users: [], progress: []}, sortBy: '', orderDirection: '', search: ''}
 
 //IMPRIME USUARIOS DE LIM PRECORE 2018
 function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e imprime sus users en el HTML
@@ -102,10 +99,13 @@ function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e impri
     return;
   }
     const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
-    const courses = Object.keys(cohort.coursesIndex)
+    const courses = Object.keys(cohort.coursesIndex);
+    // const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: filterName.value}
     options.cohort = cohort;
     options.cohortData.users = users;
     options.cohortData.progress = progress;
+    // options.sortBy = orderSelect.value;
+    options.search = filterName.value;
     let userStats = processCohortData(options);
 
     // console.log("window.usersWithStats",window.usersWithStats);  

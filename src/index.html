@@ -22,8 +22,16 @@
       </select>
       <select id="cohortsDropdown" name="cohorts">
       </select>
-      <select id="orderSelector" name="order">
-      </select>
+      <select id="order">
+          <option value="name">Ordenar por nombre</option>
+          <option value="percent">Porcentaje de completitud total</option>
+          <option value="exercisesPercent">Porcentaje de ejercicios autocorregidos completados</option>
+          <option value="quizzesPercent">Porcentaje de quizzes completados</option>
+          <option value="quizzesScoreAvg">Puntuación promedio en quizzes completados</option>  
+          <option value="readsPercent">Porcentaje de lecturas completadas</option>
+        </select>
+      <input type="text" id="writeNamesUsers" placeholder="write the name">
+      <button id="searchName">Buscar</button>
 
 
     </div>
