@@ -25,7 +25,7 @@ const callbackGetData = (users, progress, cohorts) => {
 
 getData(callbackGetData); // promise.all de los fetch con todos los datos
 
-// INICIO DROPDOWN PAISES
+//////////////////////////////////////// INICIO DROPDOWN PAISES
 let dropdownOne = document.getElementById('countryDropdown'); //Asociando JS y HTML
 dropdownOne.length = 0;
 let defaultOptionCountry = document.createElement('option'); //Definiendo el option por defecto
@@ -49,9 +49,9 @@ const countrySelector = (optionCountry) => { // Función que asignma nombres de 
   })
 };
 countrySelector(dropdownOne);
-//FIN DROPDOWN PAISES
+////////////////////////////////////////FIN DROPDOWN PAISES
 
-//INICIO DROPDOWN COHORTS
+////////////////////////////////////////INICIO DROPDOWN COHORTS
 let dropdown = document.getElementById('cohortsDropdown'); //Asociando JS y HTML
 
 dropdown.addEventListener('change', (evt) => {
@@ -73,27 +73,36 @@ const cohortSelect = (cohort) => {
     dropdown.add(option);
   }
 }
-//FIN DROPDOWN COHORTS
-//DROPDOWN ORDER
-let orderSelect = document.getElementById('order');
+////////////////////////////////////////FIN DROPDOWN COHORTS
 
+////////////////////////////////////////DROPDOWN ORDER
+let orderSelect = document.getElementById('order');
 orderSelect.addEventListener('change', (e) =>{
-options.sortBy = orderSelect.value;
-dataUsers();
+  const valueSelect = orderSelect.value
+  cohorts.forEach(elementCohort => {
+    if (elementCohort.id === valueSelect) {
+      options.cohort = elementCohort;
+    }
+  })
+options.cohortData.users = users;
+options.cohortData.progress = progress;
+options.orderBy = orderSelect.value;
+console.log(options);
+
+let userStats = processCohortData(options);
+tableCreater(userStats);
 });
 
-// FIN DROPDOWN ORDER
-
-
+//////////////////////////////////////// FIN DROPDOWN ORDER
+const options = {cohort: {}, cohortData: {users: [], progress: []}, orderBy: '', orderDirection: '', search: ''}
 const filterName = document.getElementById('writeNamesUsers'); // Llama al input de búsqueda
 
 countryOnChange = () => {
   let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
   cohortSelect(cohortFilter);
 }
-const options = {cohort: {}, cohortData: {users: [], progress: []}, sortBy: '', orderDirection: '', search: ''}
 
-//IMPRIME USUARIOS DE LIM PRECORE 2018
+//////////////////////////////////////// DETECTA E IMPRIME USUARIOS DE LIM PRECORE 2018
 function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e imprime sus users en el HTML
   if (selectedCohort !== "lim-2018-03-pre-core-pw") {
     return;
@@ -107,9 +116,14 @@ function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e impri
     // options.sortBy = orderSelect.value;
     options.search = filterName.value;
     let userStats = processCohortData(options);
+    tableCreater(userStats);   
+}
 
-    // console.log("window.usersWithStats",window.usersWithStats);  
-    let tableContainer = document.createElement('div');
+//////////////////////////////////////// FUNCIÓN QUE CREA LA TABLA
+let tableCreater = (userStats) => {
+
+  let tableContainer = document.createElement('div');
+  six.innerHTML = '';
     tableContainer.classList = "container-table"
     let table = document.createElement('table');
     table.classList = "table";
@@ -117,7 +131,8 @@ function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e impri
     tableHead.classList = "thead-dark";
     tableHead.innerHTML += '<th>Alumnas</th><th>Completitud general</th><th>Ejecicios completados</th><th>%</th><th>L. completadas</th><th>% Lecturas</th><th>Quizzes completados</th><th>% Quizzes</th><th>scoreSum</th><th>scoreAvg</th>';
     table.appendChild(tableHead);
-
+  
+    
     userStats.forEach(user => {
       // console.log(user);
       let tableRow = document.createElement('tr');
@@ -141,8 +156,7 @@ function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e impri
     tableContainer.appendChild(table);
     six.appendChild(tableContainer);
 }
-
-
+//////////////////////////////////////// FIN DE TABLE CREATER
 
 
 // function login(form){
