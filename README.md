@@ -17,7 +17,7 @@ para brindarles acceso rápido, ordenado, visual e interactivo de las estadistic
 
 Se plantearon originalmente en 2 pantallas, una con la información general de las estudiantes, y otra con la información de cada una (perfil). 
 
-![Sketch_1](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/sketch__dash_1.JPG "sketch_1")
+![Sketch_1](sketch__dash_1.JPG "sketch_1")
 
 ![Sketch_2](https://github.com/EstefaniaTelis/lim-2018-05-bc-core-pm-datadashboard/blob/master/sketch_dash_2.JPG "sketch_2")
 
