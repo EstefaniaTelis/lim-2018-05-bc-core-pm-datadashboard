@@ -77,6 +77,8 @@ const cohortSelect = (cohort) => {
 
 ////////////////////////////////////////DROPDOWN ORDER
 let orderSelect = document.getElementById('order');
+let orderDirectionSelected = document.getElementById('orderDirection');
+
 orderSelect.addEventListener('change', (e) =>{
   const valueSelect = orderSelect.value
   cohorts.forEach(elementCohort => {
@@ -84,16 +86,22 @@ orderSelect.addEventListener('change', (e) =>{
       options.cohort = elementCohort;
     }
   })
-options.cohortData.users = users;
-options.cohortData.progress = progress;
 options.orderBy = orderSelect.value;
 console.log(options);
 
-let userStats = processCohortData(options);
-tableCreater(userStats);
+// let userStats = processCohortData(options);
+});
+
+orderDirectionSelected.addEventListener('change', () => {
+  options.orderDirection = orderDirectionSelected.value;
+  let userStats = processCohortData(options);
+  tableCreater(userStats);
 });
 
 //////////////////////////////////////// FIN DROPDOWN ORDER
+
+
+
 const options = {cohort: {}, cohortData: {users: [], progress: []}, orderBy: '', orderDirection: '', search: ''}
 const filterName = document.getElementById('writeNamesUsers'); // Llama al input de búsqueda
 
