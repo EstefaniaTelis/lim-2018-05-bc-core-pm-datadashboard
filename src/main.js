@@ -99,11 +99,19 @@ orderDirectionSelected.addEventListener('change', () => {
 });
 
 //////////////////////////////////////// FIN DROPDOWN ORDER
-
-
-
 const options = {cohort: {}, cohortData: {users: [], progress: []}, orderBy: '', orderDirection: '', search: ''}
+
+///////FILTER
 const filterName = document.getElementById('writeNamesUsers'); // Llama al input de búsqueda
+const searchButton = document.getElementById('searchName'); // llama al botón de búsqueda
+
+searchButton.addEventListener('click', ()=>{
+options.search = filterName.value;
+let userStats = processCohortData(options);
+tableCreater(userStats);
+});
+
+///////FILTER OFF
 
 countryOnChange = () => {
   let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
@@ -122,7 +130,6 @@ function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e impri
     options.cohortData.users = users;
     options.cohortData.progress = progress;
     // options.sortBy = orderSelect.value;
-    options.search = filterName.value;
     let userStats = processCohortData(options);
     tableCreater(userStats);   
 }
