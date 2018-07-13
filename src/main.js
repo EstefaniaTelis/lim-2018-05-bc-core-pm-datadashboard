@@ -1,7 +1,7 @@
 ////////////////////// BASICS
-const cohortsURL = '../data/cohorts.json';
-const usersURL = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
-const progressURL = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+const cohortsURL = 'https://api.laboratoria.la/cohorts';
+const usersURL = 'https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/users';
+const progressURL = 'https://api.laboratoria.la/cohorts/lim-2018-03-pre-core-pw/progress';
 const options = { cohort: {}, cohortData: { users: [], progress: [] }, orderBy: '', orderDirection: '', search: '' }
 
 
