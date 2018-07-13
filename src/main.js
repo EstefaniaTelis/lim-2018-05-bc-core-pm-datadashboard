@@ -1,6 +1,9 @@
+////////////////////// BASICS
 const cohortsURL = '../data/cohorts.json';
 const usersURL = '../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 const progressURL = '../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+const options = { cohort: {}, cohortData: { users: [], progress: [] }, orderBy: '', orderDirection: '', search: '' }
+
 
 window.usersWithStats = []
 const getData = (callback) => {
@@ -33,7 +36,7 @@ defaultOptionCountry.text = 'Selecciona una ciudad';
 dropdownOne.add(defaultOptionCountry);
 dropdownOne.selectedIndex = 0;
 
-const countrySelector = (optionCountry) => { // Función que asignma nombres de países
+const countrySelector = (optionCountry) => { // Función que asigna nombres de países
   let country = [
     { value: "lim", text: "Lima" },
     { value: "scl", text: "Santiago" },
@@ -49,6 +52,11 @@ const countrySelector = (optionCountry) => { // Función que asignma nombres de 
   })
 };
 countrySelector(dropdownOne);
+
+countryOnChange = () => {
+  let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
+  cohortSelect(cohortFilter);
+}
 ////////////////////////////////////////FIN DROPDOWN PAISES
 
 ////////////////////////////////////////INICIO DROPDOWN COHORTS
@@ -75,21 +83,32 @@ const cohortSelect = (cohort) => {
 }
 ////////////////////////////////////////FIN DROPDOWN COHORTS
 
+//////////////////////////////////////// DETECTA E IMPRIME USUARIOS DE LIM PRECORE 2018
+function dataUsers(selectedCohort) { 
+  if (selectedCohort !== "lim-2018-03-pre-core-pw") {
+    return;
+  }
+  const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
+  const courses = Object.keys(cohort.coursesIndex);
+  options.cohort = cohort;
+  options.cohortData.users = users;
+  options.cohortData.progress = progress;
+  let userStats = processCohortData(options);
+  tableCreater(userStats);
+}
+
 ////////////////////////////////////////DROPDOWN ORDER
 let orderSelect = document.getElementById('order');
 let orderDirectionSelected = document.getElementById('orderDirection');
 
-orderSelect.addEventListener('change', (e) =>{
+orderSelect.addEventListener('change', (e) => {
   const valueSelect = orderSelect.value
   cohorts.forEach(elementCohort => {
     if (elementCohort.id === valueSelect) {
       options.cohort = elementCohort;
     }
   })
-options.orderBy = orderSelect.value;
-console.log(options);
-
-// let userStats = processCohortData(options);
+  options.orderBy = orderSelect.value;
 });
 
 orderDirectionSelected.addEventListener('change', () => {
@@ -99,77 +118,55 @@ orderDirectionSelected.addEventListener('change', () => {
 });
 
 //////////////////////////////////////// FIN DROPDOWN ORDER
-const options = {cohort: {}, cohortData: {users: [], progress: []}, orderBy: '', orderDirection: '', search: ''}
 
-///////FILTER
+/////// INPUT DE FILTER
 const filterName = document.getElementById('writeNamesUsers'); // Llama al input de búsqueda
 const searchButton = document.getElementById('searchName'); // llama al botón de búsqueda
 
-searchButton.addEventListener('click', ()=>{
-options.search = filterName.value;
-let userStats = processCohortData(options);
-tableCreater(userStats);
+searchButton.addEventListener('click', () => {
+  options.search = filterName.value;
+  let userStats = processCohortData(options);
+  tableCreater(userStats);
 });
 
-///////FILTER OFF
-
-countryOnChange = () => {
-  let cohortFilter = window.cohorts.filter(item => (item.id.slice(0, 3) == dropdownOne.value));
-  cohortSelect(cohortFilter);
-}
-
-//////////////////////////////////////// DETECTA E IMPRIME USUARIOS DE LIM PRECORE 2018
-function dataUsers(selectedCohort) { //Detecta la cohort de preadmisión e imprime sus users en el HTML
-  if (selectedCohort !== "lim-2018-03-pre-core-pw") {
-    return;
-  }
-    const cohort = cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
-    const courses = Object.keys(cohort.coursesIndex);
-    // const options = {cohort: cohort, cohortData: {users: users, progress: progress}, sortBy: '', orderDirection: '', search: filterName.value}
-    options.cohort = cohort;
-    options.cohortData.users = users;
-    options.cohortData.progress = progress;
-    // options.sortBy = orderSelect.value;
-    let userStats = processCohortData(options);
-    tableCreater(userStats);   
-}
+/////// FIN DEL INPUT DE FILTER
 
 //////////////////////////////////////// FUNCIÓN QUE CREA LA TABLA
 let tableCreater = (userStats) => {
 
   let tableContainer = document.createElement('div');
   six.innerHTML = '';
-    tableContainer.classList = "container-table"
-    let table = document.createElement('table');
-    table.classList = "table";
-    let tableHead = document.createElement('tr');
-    tableHead.classList = "thead-dark";
-    tableHead.innerHTML += '<th>Alumnas</th><th>Completitud general</th><th>Ejecicios completados</th><th>%</th><th>L. completadas</th><th>% Lecturas</th><th>Quizzes completados</th><th>% Quizzes</th><th>scoreSum</th><th>scoreAvg</th>';
-    table.appendChild(tableHead);
-  
-    
-    userStats.forEach(user => {
-      // console.log(user);
-      let tableRow = document.createElement('tr');
-      tableRow.innerHTML += '<td>' + user.name + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.exercises.completed + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.exercises.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.reads.completed + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.reads.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.completed + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.percent + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreAvg + '</td>';
-      table.appendChild(tableRow);
+  tableContainer.classList = "container-table"
+  let table = document.createElement('table');
+  table.classList = "table";
+  let tableHead = document.createElement('tr');
+  tableHead.classList = "thead-dark";
+  tableHead.innerHTML += '<th>Alumnas</th><th>Completitud general</th><th>Ejecicios completados</th><th>%</th><th>L. completadas</th><th>% Lecturas</th><th>Quizzes completados</th><th>% Quizzes</th><th>scoreSum</th><th>scoreAvg</th>';
+  table.appendChild(tableHead);
 
-    })
 
-    tableContainer.appendChild(table);
-    six.appendChild(tableContainer);
+  userStats.forEach(user => {
+    // console.log(user);
+    let tableRow = document.createElement('tr');
+    tableRow.innerHTML += '<td>' + user.name + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.exercises.completed + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.exercises.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.reads.completed + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.reads.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.quizzes.completed + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.quizzes.percent + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreAvg + '</td>';
+    table.appendChild(tableRow);
+
+  })
+
+  tableContainer.appendChild(table);
+  six.appendChild(tableContainer);
 }
 //////////////////////////////////////// FIN DE TABLE CREATER
 
