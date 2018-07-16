@@ -1,6 +1,10 @@
-## Acerca de los usuarios
+# Data Dashboard - Laboratoria
+
+## Principales usuarios del producto
 
 Los principales usuarios son los Training Managers de Laboratoria, quienes frecuentemente necesitan ver la data de los estudiantes de una forma más visual, ordenada y rápida.
+
+## Objetivos de los usuarios
 
 A través de encuestas descubrimos que los datos más relevantes que desean ver en la interfaz son:
 
@@ -33,3 +37,21 @@ Una vez obtenido nuevamente el feedback de las usuarias, se realizaron modificac
 ![Proto_1](pantalla-1.jpg "proto_1")
 
 ![Proto_2](pantalla-2.jpg "proto_2")
+
+## Maquetado
+
+# Primera versión:
+![Proto_2](pantalla-3.jpg "proto_2")
+
+# Segunda versión:
+
+Una vez realizados nuevos test, se concluye que es necesario poder ocultar la barra lateral para facilitar la visualización en distintos tamaños de pantallas. La usuaria manifiesta acceder 99 de cada 100 veces a través de computadoras / laptops, por lo que no se hace énfasis en mobile.
+
+
+## Tecnologías utilizadas
+
+1. HTML
+2. CSS
+3. Vanilla JavaScript
+4. Boostrap (CSS)
+5. Figma (Prototipado)

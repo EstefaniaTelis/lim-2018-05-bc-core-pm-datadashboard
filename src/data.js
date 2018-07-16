@@ -1,5 +1,5 @@
 window.computeUsersStats = (users, progress, courses) => {
-  
+
   let usersWithStats = [];
   let i = 0
   users.forEach(user => {
@@ -82,20 +82,17 @@ window.computeUsersStats = (users, progress, courses) => {
 
       newUser.stats.quizzes.scoreSum = puntuacion; // todas las puntuaciones
       newUser.stats.quizzes.scoreAvg = Math.round(puntuacion / newUser.stats.quizzes.completed);  // todas las puntiacion / el total de quizzes completados
-        if (newUser.stats.quizzes.completed === 0){
-          newUser.stats.quizzes.scoreAvg = 0;
-        }
+      if (newUser.stats.quizzes.completed === 0) {
+        newUser.stats.quizzes.scoreAvg = 0;
+      }
 
-      // console.log(unitsUserMap); 
       newUser.progress['intro']['units'] = unitsUserMap;
-      // console.log(newUser.stats);
       newUser.stats.percent = newUser.progress['intro'].percent
     }
     usersWithStats[i] = newUser
     i++
   })
-  // console.log(usersWithStats)
-  // console.log(usersWithStats[0]);
+
   return usersWithStats
 }
 //2da función
@@ -103,113 +100,113 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   //Compare users by name ASC
   let comparedNames = (a, b) => {
     if (a.name < b.name) {
-      return -1;   
+      return -1;
     }
     if (a.name > b.name) {
       return 1;
     } else return 0;
   }
 
-//Compare users by name DESC
-let comparedNamesDesc = (a, b) => -comparedNames(a, b);
+  //Compare users by name DESC
+  let comparedNamesDesc = (a, b) => -comparedNames(a, b);
 
-//Compare users by percent ASC
-let comparePercent = (a, b) => {
-  if (a.stats.percent < b.stats.percent) {
-    return -1;
-  } else if (a.stats.percent > b.stats.percent) {
-    return 1;
-  } else return 0;
-}
-//Compare users by percent DESC
-let comparePercentDesc = (a, b) => -comparePercent(a, b);
-//Compare EXCERCISES by percent ASC
-let compareExercisesPercent = (a, b) => {
-  if (a.stats.exercises.percent < b.stats.exercises.percent) {
-    return -1;
-  } else if (a.stats.exercises.percent > b.stats.exercises.percent) {
-    return 1;
-  } else return 0;
-}
-//Compare EXCERCISES by percent DESC
-let compareExercisesPercentDesc = (a, b) => -compareExercisesPercent(a, b);
-//Compare QUIZZES by percent ASC
-let compareQuizzesPercent = (a, b) => {
-  if (a.stats.quizzes.percent < b.stats.quizzes.percent) {
-    return -1;
-  } else if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
-    return 1;
-  } else return 0;
-}
-//Compare QUIZZES by percent DESC
-let compareQuizzesPercentDesc = (a, b) => -compareQuizzesPercent(a, b);
+  //Compare users by percent ASC
+  let comparePercent = (a, b) => {
+    if (a.stats.percent < b.stats.percent) {
+      return -1;
+    } else if (a.stats.percent > b.stats.percent) {
+      return 1;
+    } else return 0;
+  }
+  //Compare users by percent DESC
+  let comparePercentDesc = (a, b) => -comparePercent(a, b);
+  //Compare EXCERCISES by percent ASC
+  let compareExercisesPercent = (a, b) => {
+    if (a.stats.exercises.percent < b.stats.exercises.percent) {
+      return -1;
+    } else if (a.stats.exercises.percent > b.stats.exercises.percent) {
+      return 1;
+    } else return 0;
+  }
+  //Compare EXCERCISES by percent DESC
+  let compareExercisesPercentDesc = (a, b) => -compareExercisesPercent(a, b);
+  //Compare QUIZZES by percent ASC
+  let compareQuizzesPercent = (a, b) => {
+    if (a.stats.quizzes.percent < b.stats.quizzes.percent) {
+      return -1;
+    } else if (a.stats.quizzes.percent > b.stats.quizzes.percent) {
+      return 1;
+    } else return 0;
+  }
+  //Compare QUIZZES by percent DESC
+  let compareQuizzesPercentDesc = (a, b) => -compareQuizzesPercent(a, b);
 
-//Compare QUIZZES by scoreAVG ASC
-let compareQuizzesScoreAvg = (a, b) => {
-  if (a.stats.quizzes.scoreAvg < b.stats.quizzes.scoreAvg) {
-    return -1;
-  } else if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
-    return 1;
-  } else return 0;
-}
-//Compare QUIZZES by scoreAVG DESC
-let compareQuizzesScoreAvgDesc = (a, b) => -compareQuizzesScoreAvg(a, b);
+  //Compare QUIZZES by scoreAVG ASC
+  let compareQuizzesScoreAvg = (a, b) => {
+    if (a.stats.quizzes.scoreAvg < b.stats.quizzes.scoreAvg) {
+      return -1;
+    } else if (a.stats.quizzes.scoreAvg > b.stats.quizzes.scoreAvg) {
+      return 1;
+    } else return 0;
+  }
+  //Compare QUIZZES by scoreAVG DESC
+  let compareQuizzesScoreAvgDesc = (a, b) => -compareQuizzesScoreAvg(a, b);
 
-//Compare READS by percent ASC
-let compareReadsPercent = (a, b) => {
-  if (a.stats.reads.percent < b.stats.reads.percent) {
-    return -1;
-  } else if (a.stats.reads.percent > b.stats.reads.percent) {
-    return 1;
-  } else return 0;
-}
-//Compare READS by percent DESC
-let compareReadsPercentDesc = (a, b) => -compareReadsPercent(a, b);
-let orderedUsers = users;
-if (orderBy === "name") {
-  if (orderDirection === "ASC") {
-    orderedUsers.sort(comparedNames)
-  } else orderedUsers.sort(comparedNamesDesc)
-}
-if (orderBy === "percent") {
-  if (orderDirection === "ASC") {
-    orderedUsers.sort(comparePercent)
-  } else orderedUsers.sort(comparePercentDesc)
-}
-if (orderBy === "exercisesPercent") {
-  if (orderDirection === "ASC") {
-    orderedUsers.sort(compareExercisesPercent)
-  } else orderedUsers.sort(compareExercisesPercentDesc)
-}
-if (orderBy === "quizzesPercent") {
-  if (orderDirection === "ASC") {
-    orderedUsers.sort(compareQuizzesPercent)
-  } else orderedUsers.sort(compareQuizzesPercentDesc)
-}
-if (orderBy === "quizzesScoreAvg") {
-  if (orderDirection === "ASC") {
-    orderedUsers.sort(compareQuizzesScoreAvg)
-  } else orderedUsers.sort(compareQuizzesScoreAvgDesc)
-}
-if (orderBy === "readsPercent") {
-  if (orderDirection === "ASC") {
-    orderedUsers.sort(compareReadsPercent);
-  } else orderedUsers.sort(compareReadsPercentDesc)
-}
-return orderedUsers;
+  //Compare READS by percent ASC
+  let compareReadsPercent = (a, b) => {
+    if (a.stats.reads.percent < b.stats.reads.percent) {
+      return -1;
+    } else if (a.stats.reads.percent > b.stats.reads.percent) {
+      return 1;
+    } else return 0;
+  }
+  //Compare READS by percent DESC
+  let compareReadsPercentDesc = (a, b) => -compareReadsPercent(a, b);
+  let orderedUsers = users;
+  if (orderBy === "name") {
+    if (orderDirection === "ASC") {
+      orderedUsers.sort(comparedNames)
+    } else orderedUsers.sort(comparedNamesDesc)
+  }
+  if (orderBy === "percent") {
+    if (orderDirection === "ASC") {
+      orderedUsers.sort(comparePercent)
+    } else orderedUsers.sort(comparePercentDesc)
+  }
+  if (orderBy === "exercisesPercent") {
+    if (orderDirection === "ASC") {
+      orderedUsers.sort(compareExercisesPercent)
+    } else orderedUsers.sort(compareExercisesPercentDesc)
+  }
+  if (orderBy === "quizzesPercent") {
+    if (orderDirection === "ASC") {
+      orderedUsers.sort(compareQuizzesPercent)
+    } else orderedUsers.sort(compareQuizzesPercentDesc)
+  }
+  if (orderBy === "quizzesScoreAvg") {
+    if (orderDirection === "ASC") {
+      orderedUsers.sort(compareQuizzesScoreAvg)
+    } else orderedUsers.sort(compareQuizzesScoreAvgDesc)
+  }
+  if (orderBy === "readsPercent") {
+    if (orderDirection === "ASC") {
+      orderedUsers.sort(compareReadsPercent);
+    } else orderedUsers.sort(compareReadsPercentDesc)
+  }
+  return orderedUsers;
 };
 
 ///////////////// processCohortData(options)
 window.filterUsers = (users, search) => {
-  const filterUsers = users.filter(userFilter => userFilter.name.toLowerCase().indexOf(search.toLowerCase())>-1 )
+  const filterUsers = users.filter(userFilter => userFilter.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
   return filterUsers;
 }
 
 window.processCohortData = (options) => {
   const courses = Object.keys(options.cohort.coursesIndex); //Devuelve un array con las 
-  let estudiantes = computeUsersStats(options.cohortData.users,options.cohortData.progress, courses); //enviando las propiedades users,progress,courses.
+  let estudiantes = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses); //enviando las propiedades users,progress,courses.
   let estudiantesOrdenados = sortUsers(estudiantes, options.orderBy, options.orderDirection);
-  
+
   let filtrandoUsuarios = filterUsers(estudiantesOrdenados, options.search);
 
   return filtrandoUsuarios;

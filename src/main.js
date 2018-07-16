@@ -84,7 +84,7 @@ const cohortSelect = (cohort) => {
 ////////////////////////////////////////FIN DROPDOWN COHORTS
 
 //////////////////////////////////////// DETECTA E IMPRIME USUARIOS DE LIM PRECORE 2018
-function dataUsers(selectedCohort) { 
+function dataUsers(selectedCohort) {
   if (selectedCohort !== "lim-2018-03-pre-core-pw") {
     return;
   }
@@ -136,32 +136,32 @@ let tableCreater = (userStats) => {
 
   let tableContainer = document.createElement('div');
   six.innerHTML = '';
-    tableContainer.classList = "container-table"
-    let table = document.createElement('table');
-    table.classList = "table";
-    let tableHead = document.createElement('tr');
-    tableHead.classList = "thead-dark";
-    tableHead.innerHTML += '<th>Alumnas</th><th>Completitud total</th><th>%</th><th>% Lecturas</th><th>% Quizzes</th><th>scoreAvg</th>';
-    table.appendChild(tableHead);
-  
-    
-    userStats.forEach(user => {
-      // console.log(user);
-      let tableRow = document.createElement('tr');
-      tableRow.innerHTML += '<td>' + user.name + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.exercises.completed + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.exercises.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.reads.completed + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.reads.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.quizzes.completed + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.percent + '</td>';
-      // tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
-      tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreAvg + '</td>';
-      table.appendChild(tableRow);
+  tableContainer.classList = "container-table"
+  let table = document.createElement('table');
+  table.classList = "table";
+  let tableHead = document.createElement('tr');
+  tableHead.classList = "thead-dark";
+  tableHead.innerHTML += '<th>Alumnas</th><th>Completitud total</th><th>%</th><th>% Lecturas</th><th>% Quizzes</th><th>scoreAvg</th>';
+  table.appendChild(tableHead);
+
+
+  userStats.forEach(user => {
+    // console.log(user);
+    let tableRow = document.createElement('tr');
+    tableRow.innerHTML += '<td>' + user.name + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.exercises.total + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.exercises.completed + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.exercises.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.reads.total + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.reads.completed + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.reads.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.quizzes.total + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.quizzes.completed + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.quizzes.percent + '</td>';
+    // tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreSum + '</td>';
+    tableRow.innerHTML += '<td>' + user.stats.quizzes.scoreAvg + '</td>';
+    table.appendChild(tableRow);
 
   })
 

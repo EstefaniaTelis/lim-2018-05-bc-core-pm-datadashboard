@@ -5,47 +5,49 @@
   <meta charset="utf-8">
   <title>Data Dashboard</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
     crossorigin="anonymous">
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="one">
-      <img id="logo" src="img/logo.png" alt="logo_laboratoria">
-      <!-- <input type="search" id="mySearch" name="q" placeholder="Search the site..." size="30"> -->
-      <!-- <button id="boton">Search</button> -->
-      <img id="login" src="img/login.png" alt="">
-    </div>
-    <div class="three">
+  <div class="header">
+
+    
+  </div>
+  <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
       <select id="countryDropdown" name="countryDropdown" onchange="countryOnChange()">
       </select>
       <select id="cohortsDropdown" name="cohorts">
       </select>
       <select id="order">
-          <option value="name">Ordenar por nombre</option>
-          <option value="percent">Porcentaje de completitud total</option>
-          <option value="exercisesPercent">Porcentaje de ejercicios autocorregidos completados</option>
-          <option value="quizzesPercent">Porcentaje de quizzes completados</option>
-          <option value="quizzesScoreAvg">Puntuación promedio en quizzes completados</option>  
-          <option value="readsPercent">Porcentaje de lecturas completadas</option>
-        </select> <br>
-       Ordenar en dirección: <select id="orderDirection">
-          <option value="ASC">Ascendente</option>
-          <option value="DSC">Descendente</option>
-        </select>
-       
-      <br><input type="text" id="writeNamesUsers" placeholder="Buscar por nombre">
+        <option value="name">Ordenar por nombre</option>
+        <option value="percent">Porcentaje de completitud total</option>
+        <option value="exercisesPercent">Porcentaje de ejercicios autocorregidos completados</option>
+        <option value="quizzesPercent">Porcentaje de quizzes completados</option>
+        <option value="quizzesScoreAvg">Puntuación promedio en quizzes completados</option>
+        <option value="readsPercent">Porcentaje de lecturas completadas</option>
+      </select>
+      Ordenar en dirección:
+      <select id="orderDirection">
+        <option value="ASC">Ascendente</option>
+        <option value="DSC">Descendente</option>
+      </select>
+      <input type="text" id="writeNamesUsers" placeholder="Buscar por nombre">
       <button id="searchName" class="btn btn-primary">Buscar</button>
-
-
-    </div>
-    <div id="six">
-    </div>
+    </ul>
   </div>
+  <div id="six" class="main center"></div>
 
-<script src="data.js"></script>
-<script src="main.js"></script>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
 
 </body>
 
