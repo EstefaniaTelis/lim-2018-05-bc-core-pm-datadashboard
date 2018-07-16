@@ -87,43 +87,43 @@ describe('data', () => {
     });
 
     it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC', () => {
-      assert.equal(sortUsers(users, 'totalComp', 'ASC')[0].stats.percent, 100);
+      assert.equal(sortUsers(users, 'percent', 'ASC')[0].stats.percent, 0);
     });
 
     it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC', () => {
-      assert.equal(sortUsers(users, 'totalComp', 'DESC')[0].stats.percent, 100);
+      assert.equal(sortUsers(users, 'percent', 'DESC')[0].stats.percent, 100);
     });
 
     it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC', () => {
-      assert.equal(sortUsers(users, 'excercises', 'ASC')[0].stats.exercises.percent, 100);
+      assert.equal(sortUsers(users, 'exercisesPercent', 'ASC')[0].stats.exercises.percent, 0);
     });
 
     it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC', () => {
-      assert.equal(sortUsers(users, 'excercises', 'DESC')[0].stats.exercises.percent, 100);
+      assert.equal(sortUsers(users, 'exercisesPercent', 'DESC')[0].stats.exercises.percent, 100);
     });
 
     it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC', () => {
-      assert.equal(sortUsers(users, 'quizzes', 'ASC')[0].stats.quizzes.percent, 100);
+      assert.equal(sortUsers(users, 'quizzesPercent', 'ASC')[0].stats.quizzes.percent, 0);
     });
 
     it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC', () => {
-      assert.equal(sortUsers(users, 'quizzes', 'DESC')[0].stats.quizzes.percent, 100);
+      assert.equal(sortUsers(users, 'quizzesPercent', 'DESC')[0].stats.quizzes.percent, 100);
     });
 
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC', () => {
-      assert.equal(sortUsers(users, 'quizzesAvg', 'ASC')[0].stats.quizzes.scoreAvg, 70);
+      assert.equal(sortUsers(users, 'quizzesScoreAvg', 'ASC')[0].stats.quizzes.scoreAvg, 0);
     });
 
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC', () => {
-      assert.equal(sortUsers(users, 'quizzesAvg', 'DESC')[0].stats.quizzes.scoreAvg, 70);
+      assert.equal(sortUsers(users, 'quizzesScoreAvg', 'DESC')[0].stats.quizzes.scoreAvg, 100);
     });
 
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC', () => {
-      assert.equal(sortUsers(users, 'reads', 'ASC')[0].stats.reads.percent, 100);
+      assert.equal(sortUsers(users, 'readsPercent', 'ASC')[0].stats.reads.percent, 0);
     });
 
     it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC', () => {
-      assert.equal(sortUsers(users, 'reads', 'DESC')[0].stats.reads.percent, 100);
+      assert.equal(sortUsers(users, 'readsPercent', 'DESC')[0].stats.reads.percent, 100);
     });
   });
 

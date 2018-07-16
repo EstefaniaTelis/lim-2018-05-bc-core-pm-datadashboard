@@ -41,12 +41,12 @@ Una vez obtenido nuevamente el feedback de las usuarias, se realizaron modificac
 ## Maquetado
 
 # Primera versión:
-![Proto_2](pantalla-3.jpg "proto_2")
+![Proto_3](pantalla-3.jpg "proto_3")
 
 # Segunda versión:
 
 Una vez realizados nuevos test, se concluye que es necesario poder ocultar la barra lateral para facilitar la visualización en distintos tamaños de pantallas. La usuaria manifiesta acceder 99 de cada 100 veces a través de computadoras / laptops, por lo que no se hace énfasis en mobile.
-
+![Proto_4](pantalla-4.jpg "proto_4")
 
 ## Tecnologías utilizadas
 

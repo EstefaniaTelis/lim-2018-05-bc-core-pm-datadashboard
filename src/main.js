@@ -141,7 +141,7 @@ let tableCreater = (userStats) => {
   table.classList = "table";
   let tableHead = document.createElement('tr');
   tableHead.classList = "thead-dark";
-  tableHead.innerHTML += '<th>Alumnas</th><th>Completitud total</th><th>%</th><th>% Lecturas</th><th>% Quizzes</th><th>scoreAvg</th>';
+  tableHead.innerHTML += '<th>Alumnas</th><th>Completitud total</th><th>% Ejercicios</th><th>% Lecturas</th><th>% Quizzes</th><th>scoreAvg</th>';
   table.appendChild(tableHead);
 
 

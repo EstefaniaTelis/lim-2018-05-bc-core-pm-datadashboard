@@ -45,15 +45,21 @@ body {
     height: 100%;
     position: fixed;
     left: 0;
-    width: 450px;
+    width: 480px;
     margin-top: 60px;
-    transform: translateX(-450px);
+    transform: translateX(-480px);
     transition: transform 250ms ease-in-out;
     background: yellow;
+}
+#logo{
+  width: 350px;
+  height: 100px;
+  margin-left: 50px;
 }
 .sidebarMenuInner{
     margin:0;
     padding:0;
+    margin-left: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.10);
 }
 input[type="checkbox"]:checked ~ #sidebarMenu {
@@ -124,7 +130,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 }
 #six .container-table{
   width: auto;
-  overflow: scroll;
+  /* overflow: scroll; */
   max-height: auto;
   margin-top: 60px;
 }
